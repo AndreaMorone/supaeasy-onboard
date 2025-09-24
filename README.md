@@ -106,7 +106,7 @@ You have **7 days** to complete all 15 functions and submit your solution.
 ## 📞 Support
 
 If you have questions during the onboarding process:
-- Check the [SupaEasy Documentation](https://docs.supaeasy.com)
+- Check the [SupaEasy Documentation](https://nextools.crunch.help/en/supaeasy-help-docs)
 - Review the [Shopify Functions Documentation](https://shopify.dev/docs/api/functions)
 - Contact the Nextools team for clarification
 
