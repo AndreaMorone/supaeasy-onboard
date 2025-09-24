@@ -82,7 +82,7 @@ If products aren't compatible, this function prevents checkout completion until 
 ### Video Walkthrough
 - [x] 2:32-minutes video showing how this function works https://komododecks.com/recordings/FnV0KTtOscF2l1OxCx6E
 - [x] Video shows the implementation, cart and checkout process
-- [x] Video is clear and step by step process
+- [x] Video is clear and showes step by step process
 
 ## Challenges Encountered
 
@@ -104,5 +104,6 @@ If products aren't compatible, this function prevents checkout completion until 
 
 ## Required Information
 - **Store Domain:** https://adnan-afsari-supaeasy-onboarding.myshopify.com
+- **Store Password:** 1234
 
 ---

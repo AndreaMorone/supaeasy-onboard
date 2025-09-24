@@ -1,7 +1,7 @@
-# Product Compatibility Validation Function
+# Product Quantity Limits Function
 
 ## Function Name
-**Product Compatibility Validation**
+**Product Quantity Limits**
 
 ## Function Type
 - [ ] Discount Function (choose between Product/Order/Shipping)
@@ -10,25 +10,24 @@
 - [x] Validation Function
 
 ## Description
-This function checks if products added to the cart are compatible with each other based on their tags.
-If products aren't compatible, this function prevents checkout completion until compatibility is resolved by removing one of the conflicting products from the cart. This prevents users from buying conflicting products together.
+This Function helps merchants define and enforce purchase rules across their store. It supports flexible per-product, per-customer, and daily limits, ensuring customers can’t exceed set thresholds. This prevents bulk buying abuse, protects inventory, and guarantees fair distribution of popular or limited-edition items, while allowing merchants to manage stock more effectively.
 
 ## Requirements Met
-- [x] Primary requirement: Prevent users from buying conflicting products together
-- [x] Secondary requirement: Any product can be added to the cart smoothly in the cart.
-- [x] Additional features: Display an error message and prevent checkout if there are incompatible products in the cart until one of them is removed.
+- [x] Primary requirement: Enforces defined rules (per-product, per-customer, bulk vs. non-bulk) that can't be escaped.
+- [x] Secondary requirement: Blocks adding to the cart when customers exceed certain limits. 
+- [x] Additional features: Clear, user-friendly error messages are displayed when limits are exceeded
 
 ## Implementation Details
 
 ### Business Logic
-- Products with conflicting tags cannot be purchased together
-- Shown specific error message only at checkout, not in cart
-- Customers can add products to cart normally
-- Must remove incompatible products to proceed
+- Maximum 3 units per products for new customers
+- Maximum 5 units per products for old customers
+- Maximum 10 units per customer per day
+- Maximum 50 units per customer if bulk product
 
 ### Conditions/Triggers
-- **When does this function activate?** It runs on CHECKOUT_INTERACTION and CHECKOUT_COMPLETION only if the cart has more than 1 line item
-- **What conditions must be met?** Must be two products in the cart with Incompatible tags: "electronics" + "water-resistant"
+- **When does this function activate?** It runs when the buyer journey is in one of these steps CART_INTERACTION, CHECKOUT_INTERACTION and CHECKOUT_COMPLETION and he validation kicks in only after items are in the cart,
+- **What conditions must be met?** Any of those conditions must exceed
 - **Are there any exclusions or exceptions?**
 
 ### Configuration
@@ -37,34 +36,40 @@ If products aren't compatible, this function prevents checkout completion until 
 
 ## Testing Scenarios
 
-### Test Case 1: Compatible products
-- **Setup:** Add two products in the cart with tags Electronics + accessories
-- **Expected Result:** Products can be added to cart smoothly and successfull checkout
+### Test Case 1: Within limits
+- **Setup:** Add 3 units per product as a new customer
+- **Expected Result:** Products can be added to cart and successfull checkout
 - **Actual Result:** Products added to cart smoothly and successfull checkout
 - **Status:** [✅ Pass]
 
-### Test Case 2: Incompatible products
-- **Setup:** Add two products in the cart with tags Electronics + water-resistant 
-- **Expected Result:** Products can be added to cart smoothly but prevent checkout and Show error message
-- **Actual Result:** Products added to cart smoothly but prevented checkout and Showed error message until one of the products removed
+### Test Case 2: Exceeds product limit
+- **Setup:** Add 6 units per product as a old customer
+- **Expected Result:** Shouldn't be able add more then 5 units
+- **Actual Result:** Unable to add 6 units to the cart-limit 5
 - **Status:** [✅ Pass]
 
-### Test Case 3: Single product
-- **Setup:** Add single product in the cart
-- **Expected Result:** Products can be added to cart smoothly and successfull checkout
-- **Actual Result:** Products added to cart smoothly and successfull checkout
+### Test Case 3: Exceeds customer limit
+- **Setup:** Add total 12 units of products in the cart
+- **Expected Result:** Shouldn't be able add more then 10 units
+- **Actual Result:** Unable to add 12 units to the cart-limit 10
 - **Status:** [✅ Pass]
 
-### Test Case 4: Multiple compatible
-- **Setup:** Add multiple products in the cart
-- **Expected Result:** Products can be added to cart smoothly and successfull checkout
-- **Actual Result:** Products added to cart smoothly and successfull checkout
+### Test Case 4: Limited edition
+- **Setup:** Add 3 units of limited item
+- **Expected Result:** Shouldn't be able add more then 2 units
+- **Actual Result:** Unable to add 3 units to the cart-limit 2
 - **Status:** [✅ Pass]
 
-### Test Case 5: Mixed cart
-- **Setup:** Add multiple products in the cart with tags Electronics + clothing + water-resistant
-- **Expected Result:** Products can be added to cart smoothly but prevent checkout and Show error message
-- **Actual Result:** Products added to cart smoothly but prevented checkout and Showed error message until one of the products removed
+### Test Case 5: New customer
+- **Setup:** Add 4 units per product as a new customer
+- **Expected Result:** Shouldn't be able add more then 3 units
+- **Actual Result:** Unable to add 3 units to the cart-limit 3
+- **Status:** [✅ Pass]
+
+### Test Case 6: Bulk item
+- **Setup:** Add 60 units of bulk product
+- **Expected Result:** Shouldn't be able add more then 50 units
+- **Actual Result:** Unable to add 50 units to the cart-limit 50
 - **Status:** [✅ Pass]
 
 
@@ -74,27 +79,25 @@ If products aren't compatible, this function prevents checkout completion until 
 ### Screenshots
 - [x] Function configuration in SupaEasy
 - [x] Admin view showing function is active
-- [x] Cart with incompatible products without any error
-- [x] Checkout showes error message for incompatible products
-- [x] Successful checkout after removing incompatible products
+- [x] Various limit violation messaging 
 
 
 ### Video Walkthrough
-- [x] 2:32-minutes video showing how this function works https://komododecks.com/recordings/FnV0KTtOscF2l1OxCx6E
-- [x] Video shows the implementation, cart and checkout process
-- [x] Video is clear and step by step process
+- [x] 3:49-minutes video showing how this function works https://komododecks.com/recordings/NYmeW3EfttTNMHrkRQM6 
+- [x] Video shows the implementation of customer metafield and Shopify Flow implementation to track customer's daily purchases
+- [x] Video is clear and showes step by step process
 
 ## Challenges Encountered
 
 ### Technical Challenges
-- **Issue:** Checking products incompatiblility using SupaEasy's "Wizard" isn't possible
-- **Solution:** Used SupaEasy's "Editor" and "AI' to create a custom function and had to fix some issues and logic by hand
-- **Learning:** Understanding how SupaEasy's "Editor" and "AI' works and how it handles cart and checkout validation
+- **Issue:** Showing different error messaging for different limits isn't possbile with Supaeasy Wizard editor
+- **Solution:** Used SupaEasy's "Editor" to create a custom function
+- **Learning:** Conditionally showing different messages for various limits
 
 ### Business Logic Challenges
-- **Issue:** Needed to ensure that checkout doesn't work if incompatible products are in the cart
-- **Solution:** Used buyerJourney to solve it
-- **Learning:** Learned how buyerJourney can be used with SupaEasy's "Editor"
+- **Issue:** There is no readymade solution to track customer daily orders and update for daily buying limitation 
+- **Solution:** Used customer metafiled and Shopify flow app to solve this problem
+- **Learning:** Learned how metafiled and Shopify flow app can be used to solve complex problems
 
 ## Limitations Encountered
 
@@ -104,6 +107,6 @@ If products aren't compatible, this function prevents checkout completion until 
 
 ## Required Information
 - **Store Domain:** https://adnan-afsari-supaeasy-onboarding.myshopify.com
-
+- **Store Password:** 1234
 ---
 
