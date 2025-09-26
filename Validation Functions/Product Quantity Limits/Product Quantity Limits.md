@@ -84,6 +84,7 @@ This Function helps merchants define and enforce purchase rules across their sto
 
 ### Video Walkthrough
 - [x] 3:49-minutes video showing how this function works https://komododecks.com/recordings/NYmeW3EfttTNMHrkRQM6 
+- [x] 1:29-minute video shwoing on which collection this function will run https://komododecks.com/recordings/ZmSogqtm4qF4xZQZcfxx
 - [x] Video shows the implementation of customer metafield and Shopify Flow implementation to track customer's daily purchases
 - [x] Video is clear and showes step by step process
 
