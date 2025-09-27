@@ -77,7 +77,7 @@ This function provides a "Buy One Get One" discount where customers get 50% off 
 
 
 ### Video Walkthrough
-- [x] 2-minute video showing complete BOGO flow
+- [x] 2:56-minutes video showing complete BOGO flow https://komododecks.com/recordings/t3hRN6I4uzdCyiojlMp0?onlyRecording=1
 - [x] Video demonstrates adding items and seeing discount apply
 - [x] Video is clear and shows both desktop and mobile views
 
