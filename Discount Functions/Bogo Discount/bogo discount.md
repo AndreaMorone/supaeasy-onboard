@@ -1,4 +1,4 @@
-# Function Documentation Example
+# BOGO Discount Function
 
 ## Function Name
 **BOGO Discount**
