@@ -8,10 +8,12 @@
 2. **Make it private** to keep your work confidential
 3. **Complete all 15 functions** as specified in the requirements
 4. **Document each function** using the provided templates
-5. **Create a pull request** to the original repository with:
-   - Your completed work
+5. **Send us the repository link** via email with:
+   - Link to your private forked repository
    - Store URL (*.myshopify.com)
    - Brief summary of your approach
+
+**Note:** We do NOT want pull requests. Simply fork the repository, complete your work, and send us the link to your private repository.
 
 ### Option 2: Direct Submission
 
@@ -25,6 +27,8 @@
    - Store URL
    - Brief summary of your approach
    - Any questions or challenges you encountered
+
+**Note:** We prefer Option 1 (private repository) as it's easier to review and provides better version control.
 
 ## Required Documentation
 
