@@ -1,4 +1,4 @@
-# Submission Summary
+# Submission Summary 
 
 ## Candidate Information
 - **Name:** Marica Cinque
